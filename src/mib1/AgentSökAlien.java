@@ -225,6 +225,7 @@ public class AgentSökAlien extends javax.swing.JFrame {
          // Validering som kontrollerar att fältet inte är tomt.
         if (valideringsklass.tomtFalt(txtNamn)) {
             try {
+                //Instansiering av Strings och tilldelning genom SQL-fråga
                 String Namn = txtNamn.getText();
              
                 String ID = idb.fetchSingle("SELECT ALIEN_ID from Alien where NAMN=" + "'" + Namn+"'");
@@ -245,7 +246,8 @@ public class AgentSökAlien extends javax.swing.JFrame {
                 String ras;
                 String antalBoogies = idb.fetchSingle("SELECT ANTAL_BOOGIES from BOGLODITE where ALIEN_ID=" + ID);
                 String antalArmar = idb.fetchSingle("SELECT ANTAL_ARMAR from SQUID where ALIEN_ID=" + ID);
-
+                
+                //Beroende på vad SQL-frågan gav för svar så sätts "Ras" och "RasSpec" rätt.
                 if (antalBoogies != null) {
                     lblRasSpec2.setVisible(true);
                     lblRasSpec.setVisible(true);

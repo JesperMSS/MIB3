@@ -55,7 +55,7 @@ public class AgentUppdateraAlienB extends javax.swing.JFrame {
         lblNameHead = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         lblPasswordHead = new javax.swing.JLabel();
-        passwordVal = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         lblPhone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         lblChef = new javax.swing.JLabel();
@@ -134,7 +134,7 @@ public class AgentUppdateraAlienB extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(passwordVal, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblDateHead, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(lblDateHead2, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lblNameHead, javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,7 +190,7 @@ public class AgentUppdateraAlienB extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblPasswordHead)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(passwordVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
                         .addComponent(lblRas))
                     .addGroup(layout.createSequentialGroup()
@@ -219,92 +219,112 @@ public class AgentUppdateraAlienB extends javax.swing.JFrame {
 
     private void saveBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBTNActionPerformed
         // Validering som kontrollerar att inga fält är tomma. 
-        if (valideringsklass.tomtFalt(txtDate) && valideringsklass.tomtFalt(txtChef) && valideringsklass.tomtFalt(txtID) && valideringsklass.tomtFalt(lblPlats) && valideringsklass.tomtFalt(passwordVal) && valideringsklass.tomtFalt(txtPhone) && valideringsklass.tomtFalt(txtRasSpec)) {
-            try {
-                String RasSpec = txtRasSpec.getText();
-                String val = comboBoxRas.getSelectedItem().toString();
-                String textSQL;
-                String textSQLboglodite;
-                String textSQLsquid;
-                String textSQLsquidDEL1;
-                String textSQLsquidDEL2;
-                String textSQLworm;
-                String textSQLwormDEL1;
-                String textSQLwormDEL2;
-                String textSQLbogloditeDEL1;
-                String textSQLbogloditeDEL2;
-                String name = txtID.getText();
-                String password = passwordVal.getText();
-                String phone = txtPhone.getText();
-                String date = txtDate.getText();
-              
+        if (valideringsklass.tomtFalt(txtDate) && valideringsklass.tomtFalt(txtChef) && valideringsklass.tomtFalt(txtID) && valideringsklass.tomtFalt(lblPlats) && valideringsklass.tomtFalt(txtPassword) && valideringsklass.tomtFalt(txtPhone) && valideringsklass.tomtFalt(txtRasSpec)) {
+            // Validering som kontrollerar att att comboboxen tilldelas ett värde. 
+            if (valideringsklass.tomCombo(comboBoxRas)) {
+                // Validering som kontrollerar att användaren inte matar in ett för långt lösenord. 
+                if (valideringsklass.longPassword(txtPassword)) {
+                    // Validering som kontrollerar att användaren inte matat in ett för långt telefonnummer. 
+                    if (valideringsklass.longPhone(txtPhone)) {
+                        try {
+                            // Validering för att kontrollerar att namnet på Alien som användaren matat in finns i databasen. 
+                            String sqlName = idb.fetchSingle("select NAMN from ALIEN where NAMN =" + "'" + alienNamn + "'");
+                            if (alienNamn.equals(sqlName))
+                    
+                    try {
+                                // Instansiering av Strings samt att vissa Strings tilldelas ett värde genom getText-metoden. 
+                                String RasSpec = txtRasSpec.getText();
+                                String val = comboBoxRas.getSelectedItem().toString();
+                                String textSQL;
+                                String textSQLboglodite;
+                                String textSQLsquid;
+                                String textSQLsquidDEL1;
+                                String textSQLsquidDEL2;
+                                String textSQLworm;
+                                String textSQLwormDEL1;
+                                String textSQLwormDEL2;
+                                String textSQLbogloditeDEL1;
+                                String textSQLbogloditeDEL2;
+                                String name = txtID.getText();
+                                String password = txtPassword.getText();
+                                String phone = txtPhone.getText();
+                                String date = txtDate.getText();
 
-                // Konvertering från String till Integer.
-                int chef = Integer.parseInt(txtChef.getText());
-                int plats = Integer.parseInt(lblPlats.getText());
-                int alienID = Integer.parseInt(txtID.getText());
+                                // Konvertering från String till Integer.
+                                int chef = Integer.parseInt(txtChef.getText());
+                                int plats = Integer.parseInt(lblPlats.getText());
+                                int alienID = Integer.parseInt(txtID.getText());
 
-                // Konvertering från JavaDate till SQLdate.
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                Date parsedate = format.parse(date);
-                java.sql.Date daydate = new java.sql.Date(parsedate.getTime());
+                                // Konvertering från JavaDate till SQLdate.
+                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                Date parsedate = format.parse(date);
+                                java.sql.Date daydate = new java.sql.Date(parsedate.getTime());
 
-                String add = idb.getAutoIncrement("Alien", "Alien_ID");
+                                String add = idb.getAutoIncrement("Alien", "Alien_ID");
 
-                // Uppdaterar databasen med de nya värderna som användaren matat in.
-                textSQL = ("update ALIEN set REGISTRERINGSDATUM=" + "'" + daydate + "'" + ",LOSENORD =" + "'" + password + "'" + ",NAMN=" + "'" + name + "'" + ",TELEFON=" + "'" + phone + "'" + ",PLATS=" + plats + ",ANSVARIG_AGENT=" + chef + ",ALIEN_ID=" + alienID + "WHERE NAMN=" + "'" + alienNamn + "'");
-                System.out.println(textSQL);
-                idb.update(textSQL);
+                                // Uppdaterar databasen med de nya värderna som användaren matat in.
+                                textSQL = ("update ALIEN set REGISTRERINGSDATUM=" + "'" + daydate + "'" + ",LOSENORD =" + "'" + password + "'" + ",NAMN=" + "'" + name + "'" + ",TELEFON=" + "'" + phone + "'" + ",PLATS=" + plats + ",ANSVARIG_AGENT=" + chef + ",ALIEN_ID=" + alienID + "WHERE NAMN=" + "'" + alienNamn + "'");
+                                System.out.println(textSQL);
+                                idb.update(textSQL);
 
-                // Beroende på vilken ras man valt i Combobox läggs det till i rätt tabell.
-                if (val.equals("Boglodite")) {
-                    textSQLboglodite = ("Insert into BOGLODITE (ALIEN_ID, ANTAL_BOOGIES) values ('" + alienID + "','" + RasSpec + "')");
-                    textSQLbogloditeDEL1 = ("DELETE from SQUID where ALIEN_ID=" + alienID);
-                    textSQLbogloditeDEL2 = ("DELETE from WORM where ALIEN_ID=" + alienID);
-                    idb.insert(textSQLboglodite);
-                    idb.delete(textSQLbogloditeDEL1);
-                    idb.delete(textSQLbogloditeDEL2);
-                    System.out.println(textSQLboglodite);
-                    System.out.println(textSQLbogloditeDEL1);
-                    System.out.println(textSQLbogloditeDEL2);
+                                // Beroende på vilken ras man valt i Combobox läggs det till i rätt tabell.
+                                if (val.equals("Boglodite")) {
+                                    textSQLboglodite = ("Insert into BOGLODITE (ALIEN_ID, ANTAL_BOOGIES) values ('" + alienID + "','" + RasSpec + "')");
+                                    textSQLbogloditeDEL1 = ("DELETE from SQUID where ALIEN_ID=" + alienID);
+                                    textSQLbogloditeDEL2 = ("DELETE from WORM where ALIEN_ID=" + alienID);
+                                    idb.insert(textSQLboglodite);
+                                    idb.delete(textSQLbogloditeDEL1);
+                                    idb.delete(textSQLbogloditeDEL2);
+                                    System.out.println(textSQLboglodite);
+                                    System.out.println(textSQLbogloditeDEL1);
+                                    System.out.println(textSQLbogloditeDEL2);
 
-                } else if (val.equals("Squid")) {
-                    textSQLsquid = ("Insert into SQUID (ALIEN_ID, ANTAL_ARMAR) values ('" + alienID + "','" + RasSpec + "')");
-                    textSQLsquidDEL1 = ("DELETE from BOGLODITE where ALIEN_ID=" + alienID);
-                    textSQLsquidDEL2 = ("DELETE from WORM where ALIEN_ID=" + alienID);
-                    idb.insert(textSQLsquid);
-                    idb.delete(textSQLsquidDEL1);
-                    idb.delete(textSQLsquidDEL2);
-                    System.out.println(textSQLsquid);
-                    System.out.println(textSQLsquidDEL1);
-                    System.out.println(textSQLsquidDEL2);
+                                } else if (val.equals("Squid")) {
+                                    textSQLsquid = ("Insert into SQUID (ALIEN_ID, ANTAL_ARMAR) values ('" + alienID + "','" + RasSpec + "')");
+                                    textSQLsquidDEL1 = ("DELETE from BOGLODITE where ALIEN_ID=" + alienID);
+                                    textSQLsquidDEL2 = ("DELETE from WORM where ALIEN_ID=" + alienID);
+                                    idb.insert(textSQLsquid);
+                                    idb.delete(textSQLsquidDEL1);
+                                    idb.delete(textSQLsquidDEL2);
+                                    System.out.println(textSQLsquid);
+                                    System.out.println(textSQLsquidDEL1);
+                                    System.out.println(textSQLsquidDEL2);
 
-                } else {
-                    textSQLworm = ("Insert into WORM (ALIEN_ID) values ('" + alienID + "')");
-                    textSQLwormDEL1 = ("DELETE from BOGLODITE where ALIEN_ID=" + alienID);
-                    textSQLwormDEL2 = ("DELETE from SQUID where ALIEN_ID=" + alienID);
-                    idb.insert(textSQLworm);
-                    idb.delete(textSQLwormDEL1);
-                    idb.delete(textSQLwormDEL2);
-                    System.out.println(textSQLworm);
-                    System.out.println(textSQLwormDEL1);
-                    System.out.println(textSQLwormDEL2);
+                                } else {
+                                    textSQLworm = ("Insert into WORM (ALIEN_ID) values ('" + alienID + "')");
+                                    textSQLwormDEL1 = ("DELETE from BOGLODITE where ALIEN_ID=" + alienID);
+                                    textSQLwormDEL2 = ("DELETE from SQUID where ALIEN_ID=" + alienID);
+                                    idb.insert(textSQLworm);
+                                    idb.delete(textSQLwormDEL1);
+                                    idb.delete(textSQLwormDEL2);
+                                    System.out.println(textSQLworm);
+                                    System.out.println(textSQLwormDEL1);
+                                    System.out.println(textSQLwormDEL2);
+                                }
+
+                                JOptionPane.showMessageDialog(null, "Alien med namn " + alienNamn + " har nu uppdaterats");
+
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                                System.out.println("Fel");
+
+                                // Catch för date
+                            } catch (ParseException ex) {
+                                Logger.getLogger(AgentUppdateraAlienB.class.getName()).log(Level.SEVERE, null, ex);
+                                System.out.println("Fel");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Alien med detta namn finns inte i databasen, testa med ett annat namn.");
+                            }
+                        } catch (InfException ex) {
+                            Logger.getLogger(AgentUppdateraAlienB.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
-
-                JOptionPane.showMessageDialog(null, "Alien med namn " + alienNamn + " har nu uppdaterats");
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                System.out.println("Fel");
-
-                // Catch för date
-            } catch (ParseException ex) {
-                Logger.getLogger(AgentUppdateraAlienB.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Fel");
             }
     }//GEN-LAST:event_saveBTNActionPerformed
     }
     private void tbxBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbxBTNActionPerformed
+        // Skickar tillbaka användaren till AgentUppdateraAlienA.
         AgentUppdateraAlienA tbxTillA = new AgentUppdateraAlienA(idb);
         tbxTillA.setVisible(true);
         this.dispose();
@@ -382,12 +402,12 @@ public class AgentUppdateraAlienB extends javax.swing.JFrame {
     private javax.swing.JLabel lblRas;
     private javax.swing.JLabel lblRasSpec;
     private javax.swing.JLabel lblUpdAlien;
-    private javax.swing.JPasswordField passwordVal;
     private javax.swing.JButton saveBTN;
     private javax.swing.JButton tbxBTN;
     private javax.swing.JTextField txtChef;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtID;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhone;
     private javax.swing.JLabel txtPlats;
     private javax.swing.JTextField txtRasSpec;

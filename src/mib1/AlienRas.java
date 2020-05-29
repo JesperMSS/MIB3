@@ -116,24 +116,33 @@ public class AlienRas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okBTNActionPerformed
-        try {
-            DefaultTableModel modell = (DefaultTableModel) resultatPNL.getModel();
-            modell.setRowCount(0);
+        //Validering som kontrollerar att användaren valt ett värde i comboboxen.
+        if (valideringsklass.tomCombo(rasComboBox)) {
+            try {
+                // Instansiering av DefaultTableModel och tilldelar resultatPNL (JTable) DefaultTableModel.
+                DefaultTableModel modell = (DefaultTableModel) resultatPNL.getModel();
+                // Sätter antal rader till 0 så att eventulla rader som redan ligger i JTable försvinner
+                modell.setRowCount(0);
 
-            String sokRas = rasComboBox.getSelectedItem().toString();
-            ArrayList<java.util.HashMap<java.lang.String, java.lang.String>> list = idb.fetchRows("SELECT NAMN, ALIEN_ID FROM ALIEN WHERE ALIEN_ID IN (SELECT ALIEN_ID FROM " + sokRas + ")");
+                String sokRas = rasComboBox.getSelectedItem().toString();
+                // Skapar en ArrayList av HashMap som i sin tur består av två strängar. Tilldelas värde genom SQL-frågan.
+                ArrayList<java.util.HashMap<java.lang.String, java.lang.String>> list = idb.fetchRows("SELECT NAMN, ALIEN_ID FROM ALIEN WHERE ALIEN_ID IN (SELECT ALIEN_ID FROM " + sokRas + ")");
 
-            Object rowData[] = new Object[2];
-
-            Iterator itr = list.iterator();
-            while (itr.hasNext()) {
-                HashMap hm = (HashMap) itr.next();
-                rowData[0] = hm.get("NAMN");
-                rowData[1] = hm.get("ALIEN_ID");
-                modell.addRow(rowData);
+                Object rowData[] = new Object[2];
+                //Itererar över alla Aliens i Arraylisten
+                Iterator itr = list.iterator();
+                while (itr.hasNext()) {
+                    //Läser ut NAMN och ALIEN_ID ur den HashTable som ligger i ArrayListen. 
+                    //Varje HashMap representerar en rad i databsen
+                    HashMap hm = (HashMap) itr.next();
+                    rowData[0] = hm.get("NAMN");
+                    rowData[1] = hm.get("ALIEN_ID");
+                    // Lägger till datat i den modell som visas i JTable
+                    modell.addRow(rowData);
+                }
+            } catch (InfException ex) {
+                Logger.getLogger(AlienRas.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (InfException ex) {
-            Logger.getLogger(AlienRas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_okBTNActionPerformed
 

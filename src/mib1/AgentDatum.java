@@ -142,26 +142,32 @@ public class AgentDatum extends javax.swing.JFrame {
     private void okBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okBTNActionPerformed
         // Valideringsklass som kontrollerar ifall användaren matat in data i båda fälten.
      if (valideringsklass.tomtFalt(txtDate1) && valideringsklass.tomtFalt(txtDate2)) {
-            // Valideringsklass som kontrollerar ifall användaren har matat in datum i rätt format. 
-          //  if (valideringsklass.kollaDatum(newDate1) && valideringsklass.kollaDatum(newDate2))
             try {
+                // Instansiering av Strings och tilldelning av värden från getText-metoden.
                 String newDate1 = txtDate1.getText();
                 String newDate2 = txtDate2.getText();
                 System.out.println("Date" + newDate1);
                 System.out.println("Date " + newDate2);
 
+                // Instansiering av DefaultTableModel och tilldelar resultatPNL (JTable) DefaultTableModel.
                 DefaultTableModel modell = (DefaultTableModel) resultatPNL.getModel();
+                // Sätter antal rader till 0 så att eventulla rader som redan ligger i JTable försvinner 
                 modell.setRowCount(0);
-
+  
+                // Skapar en ArrayList av HashMap som i sin tur består av två strängar. Tilldelas värde genom SQL-frågan.
                 ArrayList<java.util.HashMap<java.lang.String, java.lang.String>> list = idb.fetchRows("SELECT NAMN, REGISTRERINGSDATUM from ALIEN where REGISTRERINGSDATUM between" + "'" + newDate1 + "'" + "and" + "'" + newDate2 + "'");
 
                 Object rowData[] = new Object[2];
-
+                
+                //Itererar över alla Aliens i Arraylisten
                 Iterator itr = list.iterator();
                 while (itr.hasNext()) {
+                    //Läser ut NAMN och REGISTRERINGSDATUM ur den HashTable som ligger i ArrayListen. 
+                    //Varje HashMap representerar en rad i databsen
                     HashMap hm = (HashMap) itr.next();
                     rowData[0] = hm.get("NAMN");
                     rowData[1] = hm.get("REGISTRERINGSDATUM");
+                    // Lägger till datat i den modell som visas i JTable
                     modell.addRow(rowData);
                 }
             } catch (InfException ex) {

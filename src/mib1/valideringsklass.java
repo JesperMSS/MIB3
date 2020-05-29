@@ -22,58 +22,74 @@ public class valideringsklass {
         boolean resultat = true;
         //Kollar om fält är tomma och isåfall meddelar användaren om det, verkar bara kunna kolla av ett fält i taget vilket är lite segt men det funkar 
         if (faltCheck.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null,"Ett eller flera fält är tomma, skriv in ett värde!");
+            JOptionPane.showMessageDialog(null, "Ett eller flera fält är tomma, skriv in ett värde!");
             resultat = false;
 
         }
         return resultat;
     }
-    public static boolean tomCombo(JComboBox comboCheck){
+
+    public static boolean tomCombo(JComboBox comboCheck) {
         boolean resultat = true;
         //Kollar om comboboxar är tomma och isåfall meddelar användaren om det, verkar bara kunna kolla av en combobox i taget vilket är lite segt men det funkar 
-        if(comboCheck.getSelectedIndex() == -1){
+        if (comboCheck.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, "Combolisten saknar värde, välj ett värde!");
             resultat = false;
         }
         return resultat;
     }
-    
+
     public static boolean longPassword(JPasswordField passwordCheck) {
         boolean resultat = true;
-         if(passwordCheck.getText().length() > 6) {
-              JOptionPane.showMessageDialog(null, "Lösenordet får vara max 6 tecken, välj ett kortare lösenord!");
+        //Kollar så att lösenordet inte är längre än 6 tecken.
+        if (passwordCheck.getText().length() >= 6) {
+            JOptionPane.showMessageDialog(null, "Lösenordet får vara max 6 tecken, välj ett kortare lösenord!");
             resultat = false;
-         }
-         return resultat;
+        }
+        return resultat;
     }
-}  
-//    public static boolean kollaDatum(String korrektDatumFormat) {
-//        boolean result = false;
+
+    public static boolean longName(JTextField nameCheck) {
+        boolean resultat = true;
+        //Kollar så att namnet inte är längre än 20 tecken.
+        if (nameCheck.getText().length() >= 20) {
+            JOptionPane.showMessageDialog(null, "Namnet får vara max 20 tecken, välj ett kortare namn!");
+            resultat = false;
+        }
+        return resultat;
+    }
+
+    public static boolean longPhone(JTextField phoneCheck) {
+        boolean resultat = true;
+        //Kollar så att telefonnumret inte är längre än 30 tecken.
+        if (phoneCheck.getText().length() >= 30) {
+            JOptionPane.showMessageDialog(null, "Telefonnummret får vara max 30 tecken, välj ett kortare telefonnummer!");
+            resultat = false;
+        }
+        return resultat;
+    }
+
+    public static boolean kollaDatum(String korrektDatumFormat) {
+        boolean result = false;
 //
 //        //Sträng med förbestämd "mall" om hur det inskicade strängvärdet ska se ut.
-//        String regExDatum = "\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|[3][01])";
+        String regExDatum = "\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|[3][01])";
 //
 //        //Om det inskicade strängvärdet matchar regexsträngen ovan.
-//        if (korrektDatumFormat.matches(regExDatum)) {
+        if (korrektDatumFormat.matches(regExDatum)) {
+//     //Skapar nytt SimpleDateFormat objekt med formatet "yyyy-MM-dd".
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //
-//            //Skapar nytt SimpleDateFormat objekt med formatet "yyyy-MM-dd".
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//
-//            try {
-//                sdf.parse(korrektDatumFormat);
-//                result = true;
-//            } catch (ParseException e) {
-//                //
-//            }
-//            
-//            {
-//	
-// 
-//}
-//        }
-//        if (!result) {
-//            JOptionPane.showMessageDialog(null, "Fyll i datum enligt följande mall: \"YYYY-MM-DD\"");
-//        }
-//        return result;
-//    }
-//}
+            try {
+                sdf.parse(korrektDatumFormat);
+                result = true;
+            } catch (ParseException e) {
+                //
+            }
+        }
+        if (!result) {
+            JOptionPane.showMessageDialog(null, "Fyll i datum enligt följande mall: \"YYYY-MM-DD\"");
+        }
+        return result;
+    }
+}
