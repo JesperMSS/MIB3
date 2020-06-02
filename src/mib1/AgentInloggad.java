@@ -45,6 +45,7 @@ public class AgentInloggad extends javax.swing.JFrame {
         sökAlienBTN = new javax.swing.JButton();
         datumAlienBTN = new javax.swing.JButton();
         sokRasBTN = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,6 +114,13 @@ public class AgentInloggad extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,7 +131,9 @@ public class AgentInloggad extends javax.swing.JFrame {
                         .addGap(119, 119, 119)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addGap(44, 44, 44)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(bytlösen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(logoutBTN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -141,8 +151,13 @@ public class AgentInloggad extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(21, 21, 21)
-                .addComponent(datumAlienBTN)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(datumAlienBTN))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jButton1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bytlösen, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -167,34 +182,34 @@ public class AgentInloggad extends javax.swing.JFrame {
 
     private void logoutBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBTNActionPerformed
         // TODO add your handling code here:
-        huvudFonster tbx = new huvudFonster(idb);
+        HuvudFonster tbx = new HuvudFonster(idb);
         tbx.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_logoutBTNActionPerformed
 
     private void bytlösenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bytlösenActionPerformed
         // TODO add your handling code here:
-        BytLösenord nyttlösen = new BytLösenord(idb);
+        BytLosenord nyttlösen = new BytLosenord(idb);
         nyttlösen.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bytlösenActionPerformed
 
     private void utrustningBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utrustningBTNActionPerformed
         // TODO add your handling code here:
-        agentUtrustning nyUtrustning = new agentUtrustning(idb);
+        AgentUtrustning nyUtrustning = new AgentUtrustning(idb);
         nyUtrustning.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_utrustningBTNActionPerformed
 
     private void områdeschefBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_områdeschefBTNActionPerformed
         // TODO add your handling code here:
-        Områdeschef chef = new Områdeschef(idb);
+        Omradeschef chef = new Omradeschef(idb);
         chef.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_områdeschefBTNActionPerformed
 
     private void läggTillAlienBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_läggTillAlienBTNActionPerformed
-        agentAlien läggTillAlien = new agentAlien(idb);
+        AgentAlien läggTillAlien = new AgentAlien(idb);
         läggTillAlien.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_läggTillAlienBTNActionPerformed
@@ -206,7 +221,7 @@ public class AgentInloggad extends javax.swing.JFrame {
     }//GEN-LAST:event_uppdateraAlienBTNActionPerformed
 
     private void sökAlienBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sökAlienBTNActionPerformed
-      AgentSökAlien sökAlien = new AgentSökAlien(idb);
+      AgentSokAlien sökAlien = new AgentSokAlien(idb);
        sökAlien.setVisible(true);
       this.dispose();
     }//GEN-LAST:event_sökAlienBTNActionPerformed
@@ -222,6 +237,12 @@ public class AgentInloggad extends javax.swing.JFrame {
       alienras.setVisible(true);
       this.dispose();
     }//GEN-LAST:event_sokRasBTNActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        AgentAlienPlats alienPlats = new AgentAlienPlats(idb);
+      alienPlats.setVisible(true);
+      this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,6 +283,7 @@ public class AgentInloggad extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bytlösen;
     private javax.swing.JButton datumAlienBTN;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton logoutBTN;
     private javax.swing.JButton läggTillAlienBTN;

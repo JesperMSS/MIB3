@@ -141,7 +141,7 @@ public class AgentDatum extends javax.swing.JFrame {
 
     private void okBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okBTNActionPerformed
         // Valideringsklass som kontrollerar ifall användaren matat in data i båda fälten.
-     if (valideringsklass.tomtFalt(txtDate1) && valideringsklass.tomtFalt(txtDate2)) {
+     if (Valideringsklass.tomtFalt(txtDate1) && Valideringsklass.tomtFalt(txtDate2)) {
             try {
                 // Instansiering av Strings och tilldelning av värden från getText-metoden.
                 String newDate1 = txtDate1.getText();
@@ -177,7 +177,7 @@ public class AgentDatum extends javax.swing.JFrame {
     }//GEN-LAST:event_okBTNActionPerformed
 
     private void tbxBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbxBTNActionPerformed
-       String test = huvudFonster.hamtaAnvandare();
+       String test = HuvudFonster.hamtaAnvandare();
         //om agenten är admin så kommer man till adminsidan via knappen annars så kommer man till vanliga agentsidan
         try {
             //String namn = idb.fetchSingle("Select namn from agent where namn = " + "'" + test + "'");

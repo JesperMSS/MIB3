@@ -219,104 +219,108 @@ public class AgentUppdateraAlienB extends javax.swing.JFrame {
 
     private void saveBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBTNActionPerformed
         // Validering som kontrollerar att inga fält är tomma. 
-        if (valideringsklass.tomtFalt(txtDate) && valideringsklass.tomtFalt(txtChef) && valideringsklass.tomtFalt(txtID) && valideringsklass.tomtFalt(lblPlats) && valideringsklass.tomtFalt(txtPassword) && valideringsklass.tomtFalt(txtPhone) && valideringsklass.tomtFalt(txtRasSpec)) {
+        if (Valideringsklass.tomtFalt(txtDate) && Valideringsklass.tomtFalt(txtChef) && Valideringsklass.tomtFalt(txtID) && Valideringsklass.tomtFalt(lblPlats) && Valideringsklass.tomtFalt(txtPassword) && Valideringsklass.tomtFalt(txtPhone) && Valideringsklass.tomtFalt(txtRasSpec)) {
             // Validering som kontrollerar att att comboboxen tilldelas ett värde. 
-            if (valideringsklass.tomCombo(comboBoxRas)) {
+            if (Valideringsklass.tomCombo(comboBoxRas)) {
                 // Validering som kontrollerar att användaren inte matar in ett för långt lösenord. 
-                if (valideringsklass.longPassword(txtPassword)) {
+                if (Valideringsklass.longPassword(txtPassword)) {
                     // Validering som kontrollerar att användaren inte matat in ett för långt telefonnummer. 
-                    if (valideringsklass.longPhone(txtPhone)) {
-                        try {
-                            // Validering för att kontrollerar att namnet på Alien som användaren matat in finns i databasen. 
-                            String sqlName = idb.fetchSingle("select NAMN from ALIEN where NAMN =" + "'" + alienNamn + "'");
-                            if (alienNamn.equals(sqlName))
-                    
-                    try {
-                                // Instansiering av Strings samt att vissa Strings tilldelas ett värde genom getText-metoden. 
-                                String RasSpec = txtRasSpec.getText();
-                                String val = comboBoxRas.getSelectedItem().toString();
-                                String textSQL;
-                                String textSQLboglodite;
-                                String textSQLsquid;
-                                String textSQLsquidDEL1;
-                                String textSQLsquidDEL2;
-                                String textSQLworm;
-                                String textSQLwormDEL1;
-                                String textSQLwormDEL2;
-                                String textSQLbogloditeDEL1;
-                                String textSQLbogloditeDEL2;
-                                String name = txtID.getText();
-                                String password = txtPassword.getText();
-                                String phone = txtPhone.getText();
-                                String date = txtDate.getText();
+                    if (Valideringsklass.longPhone(txtPhone)) {
+                        // Validering som kontrollerar att användaren inte matat in över 10 tecken i RasSpec.
+                        if (Valideringsklass.longRasSpec(txtRasSpec)) {
+                            try {
+                                // Validering för att kontrollerar att namnet på Alien som användaren matat in finns i databasen. 
+                                String sqlName = idb.fetchSingle("select NAMN from ALIEN where NAMN =" + "'" + alienNamn + "'");
+                                if (alienNamn.equals(sqlName)) {
 
-                                // Konvertering från String till Integer.
-                                int chef = Integer.parseInt(txtChef.getText());
-                                int plats = Integer.parseInt(lblPlats.getText());
-                                int alienID = Integer.parseInt(txtID.getText());
+                                    try {
+                                        // Instansiering av Strings samt att vissa Strings tilldelas ett värde genom getText-metoden. 
+                                        String RasSpec = txtRasSpec.getText();
+                                        String val = comboBoxRas.getSelectedItem().toString();
+                                        String textSQL;
+                                        String textSQLboglodite;
+                                        String textSQLsquid;
+                                        String textSQLsquidDEL1;
+                                        String textSQLsquidDEL2;
+                                        String textSQLworm;
+                                        String textSQLwormDEL1;
+                                        String textSQLwormDEL2;
+                                        String textSQLbogloditeDEL1;
+                                        String textSQLbogloditeDEL2;
+                                        String ID = txtID.getText();
+                                        String password = txtPassword.getText();
+                                        String phone = txtPhone.getText();
+                                        String date = txtDate.getText();
 
-                                // Konvertering från JavaDate till SQLdate.
-                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                                Date parsedate = format.parse(date);
-                                java.sql.Date daydate = new java.sql.Date(parsedate.getTime());
+                                        // Konvertering från String till Integer.
+                                        int chef = Integer.parseInt(txtChef.getText());
+                                        int plats = Integer.parseInt(lblPlats.getText());
+                                        int alienID = Integer.parseInt(txtID.getText());
 
-                                String add = idb.getAutoIncrement("Alien", "Alien_ID");
+                                        // Konvertering från JavaDate till SQLdate.
+                                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                                        Date parsedate = format.parse(date);
+                                        java.sql.Date daydate = new java.sql.Date(parsedate.getTime());
 
-                                // Uppdaterar databasen med de nya värderna som användaren matat in.
-                                textSQL = ("update ALIEN set REGISTRERINGSDATUM=" + "'" + daydate + "'" + ",LOSENORD =" + "'" + password + "'" + ",NAMN=" + "'" + name + "'" + ",TELEFON=" + "'" + phone + "'" + ",PLATS=" + plats + ",ANSVARIG_AGENT=" + chef + ",ALIEN_ID=" + alienID + "WHERE NAMN=" + "'" + alienNamn + "'");
-                                System.out.println(textSQL);
-                                idb.update(textSQL);
+                                        String add = idb.getAutoIncrement("Alien", "Alien_ID");
 
-                                // Beroende på vilken ras man valt i Combobox läggs det till i rätt tabell.
-                                if (val.equals("Boglodite")) {
-                                    textSQLboglodite = ("Insert into BOGLODITE (ALIEN_ID, ANTAL_BOOGIES) values ('" + alienID + "','" + RasSpec + "')");
-                                    textSQLbogloditeDEL1 = ("DELETE from SQUID where ALIEN_ID=" + alienID);
-                                    textSQLbogloditeDEL2 = ("DELETE from WORM where ALIEN_ID=" + alienID);
-                                    idb.insert(textSQLboglodite);
-                                    idb.delete(textSQLbogloditeDEL1);
-                                    idb.delete(textSQLbogloditeDEL2);
-                                    System.out.println(textSQLboglodite);
-                                    System.out.println(textSQLbogloditeDEL1);
-                                    System.out.println(textSQLbogloditeDEL2);
+                                        // Uppdaterar databasen med de nya värderna som användaren matat in.
+                                        textSQL = ("update ALIEN set REGISTRERINGSDATUM=" + "'" + daydate + "'" + ",LOSENORD =" + "'" + password + "'" + ",ALIEN_ID=" + "'" + ID + "'" + ",TELEFON=" + "'" + phone + "'" + ",PLATS=" + plats + ",ANSVARIG_AGENT=" + chef + "WHERE NAMN=" + "'" + alienNamn + "'");
+                                        System.out.println(textSQL);
+                                        idb.update(textSQL);
 
-                                } else if (val.equals("Squid")) {
-                                    textSQLsquid = ("Insert into SQUID (ALIEN_ID, ANTAL_ARMAR) values ('" + alienID + "','" + RasSpec + "')");
-                                    textSQLsquidDEL1 = ("DELETE from BOGLODITE where ALIEN_ID=" + alienID);
-                                    textSQLsquidDEL2 = ("DELETE from WORM where ALIEN_ID=" + alienID);
-                                    idb.insert(textSQLsquid);
-                                    idb.delete(textSQLsquidDEL1);
-                                    idb.delete(textSQLsquidDEL2);
-                                    System.out.println(textSQLsquid);
-                                    System.out.println(textSQLsquidDEL1);
-                                    System.out.println(textSQLsquidDEL2);
+                                        // Beroende på vilken ras man valt i Combobox läggs det till i rätt tabell.
+                                        if (val.equals("Boglodite")) {
+                                            textSQLboglodite = ("Insert into BOGLODITE (ALIEN_ID, ANTAL_BOOGIES) values ('" + alienID + "','" + RasSpec + "')");
+                                            textSQLbogloditeDEL1 = ("DELETE from SQUID where ALIEN_ID=" + alienID);
+                                            textSQLbogloditeDEL2 = ("DELETE from WORM where ALIEN_ID=" + alienID);
+                                            idb.insert(textSQLboglodite);
+                                            idb.delete(textSQLbogloditeDEL1);
+                                            idb.delete(textSQLbogloditeDEL2);
+                                            System.out.println(textSQLboglodite);
+                                            System.out.println(textSQLbogloditeDEL1);
+                                            System.out.println(textSQLbogloditeDEL2);
 
+                                        } else if (val.equals("Squid")) {
+                                            textSQLsquid = ("Insert into SQUID (ALIEN_ID, ANTAL_ARMAR) values ('" + alienID + "','" + RasSpec + "')");
+                                            textSQLsquidDEL1 = ("DELETE from BOGLODITE where ALIEN_ID=" + alienID);
+                                            textSQLsquidDEL2 = ("DELETE from WORM where ALIEN_ID=" + alienID);
+                                            idb.insert(textSQLsquid);
+                                            idb.delete(textSQLsquidDEL1);
+                                            idb.delete(textSQLsquidDEL2);
+                                            System.out.println(textSQLsquid);
+                                            System.out.println(textSQLsquidDEL1);
+                                            System.out.println(textSQLsquidDEL2);
+
+                                        } else {
+                                            textSQLworm = ("Insert into WORM (ALIEN_ID) values ('" + alienID + "')");
+                                            textSQLwormDEL1 = ("DELETE from BOGLODITE where ALIEN_ID=" + alienID);
+                                            textSQLwormDEL2 = ("DELETE from SQUID where ALIEN_ID=" + alienID);
+                                            idb.insert(textSQLworm);
+                                            idb.delete(textSQLwormDEL1);
+                                            idb.delete(textSQLwormDEL2);
+                                            System.out.println(textSQLworm);
+                                            System.out.println(textSQLwormDEL1);
+                                            System.out.println(textSQLwormDEL2);
+                                        }
+
+                                        JOptionPane.showMessageDialog(null, "Alien med namn " + alienNamn + " har nu uppdaterats");
+
+                                    } catch (SQLException e) {
+                                        e.printStackTrace();
+                                        System.out.println("Fel");
+
+                                        // Catch för date
+                                    } catch (ParseException ex) {
+                                        Logger.getLogger(AgentUppdateraAlienB.class.getName()).log(Level.SEVERE, null, ex);
+                                        System.out.println("Fel");
+                                    }
                                 } else {
-                                    textSQLworm = ("Insert into WORM (ALIEN_ID) values ('" + alienID + "')");
-                                    textSQLwormDEL1 = ("DELETE from BOGLODITE where ALIEN_ID=" + alienID);
-                                    textSQLwormDEL2 = ("DELETE from SQUID where ALIEN_ID=" + alienID);
-                                    idb.insert(textSQLworm);
-                                    idb.delete(textSQLwormDEL1);
-                                    idb.delete(textSQLwormDEL2);
-                                    System.out.println(textSQLworm);
-                                    System.out.println(textSQLwormDEL1);
-                                    System.out.println(textSQLwormDEL2);
+                                    JOptionPane.showMessageDialog(null, "Alien med detta namn finns inte i databasen, testa med ett annat namn.");
                                 }
-
-                                JOptionPane.showMessageDialog(null, "Alien med namn " + alienNamn + " har nu uppdaterats");
-
-                            } catch (SQLException e) {
-                                e.printStackTrace();
-                                System.out.println("Fel");
-
-                                // Catch för date
-                            } catch (ParseException ex) {
+                            } catch (InfException ex) {
                                 Logger.getLogger(AgentUppdateraAlienB.class.getName()).log(Level.SEVERE, null, ex);
-                                System.out.println("Fel");
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Alien med detta namn finns inte i databasen, testa med ett annat namn.");
                             }
-                        } catch (InfException ex) {
-                            Logger.getLogger(AgentUppdateraAlienB.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }

@@ -115,14 +115,14 @@ public class AgentUppdateraAlienA extends javax.swing.JFrame {
     // Metod för att instansiera AgentUppdateraAlienB-klassen.
     private void okBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okBTNActionPerformed
        // Validering som kontrollerar att användaren fyllt i fältet, om så är fallet så instansierar AgentUppdateraAlienB.
-        if (valideringsklass.tomtFalt(txtNamn)) {
+        if (Valideringsklass.tomtFalt(txtNamn)) {
             new AgentUppdateraAlienB(idb, getAlienNamn()).setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_okBTNActionPerformed
 
     private void tbxBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbxBTNActionPerformed
-           String test = huvudFonster.hamtaAnvandare();
+           String test = HuvudFonster.hamtaAnvandare();
         //om agenten är admin så kommer man till adminsidan via knappen annars så kommer man till vanliga agentsidan
         try {
             //String namn = idb.fetchSingle("Select namn from agent where namn = " + "'" + test + "'");

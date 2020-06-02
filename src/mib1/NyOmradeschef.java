@@ -12,12 +12,12 @@ import oru.inf.InfException;
  *
  * @author KarlJ
  */
-public class nyOmrådeschef extends javax.swing.JFrame {
+public class NyOmradeschef extends javax.swing.JFrame {
         private static InfDB idb;
     /**
      * Creates new form nyOmrådeschef
      */
-    public nyOmrådeschef(InfDB idb) {
+    public NyOmradeschef(InfDB idb) {
         initComponents();
         this.idb = idb;
     }
@@ -97,7 +97,7 @@ public class nyOmrådeschef extends javax.swing.JFrame {
 
     private void nyOmrådeschefBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nyOmrådeschefBTNActionPerformed
         // TODO add your handling code here:
-        if(valideringsklass.tomtFalt(nyOmrådeschefTextField)){
+        if(Valideringsklass.tomtFalt(nyOmrådeschefTextField)){
             String chefNamn = nyOmrådeschefTextField.getText();
             String område = områdenCombo.getSelectedItem().toString();
             ArrayList<String> agentNamn = new ArrayList<String>();
@@ -175,20 +175,21 @@ public class nyOmrådeschef extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(nyOmrådeschef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NyOmradeschef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(nyOmrådeschef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NyOmradeschef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(nyOmrådeschef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NyOmradeschef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(nyOmrådeschef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NyOmradeschef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new nyOmrådeschef(idb).setVisible(true);
+                new NyOmradeschef(idb).setVisible(true);
             }
         });
     }

@@ -17,16 +17,16 @@ import oru.inf.InfException;
 
 /**
  *
- * @author jespersundin
+ * @author Jesper
  */
-public class AlienRas extends javax.swing.JFrame {
+public class AgentAlienPlats extends javax.swing.JFrame {
 
     private static InfDB idb;
 
     /**
-     * Creates new form AlienRas
+     * Creates new form AgentAlienPlats
      */
-    public AlienRas(InfDB idb) {
+    public AgentAlienPlats(InfDB idb) {
         initComponents();
         this.idb = idb;
     }
@@ -40,40 +40,43 @@ public class AlienRas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultatPNL = new javax.swing.JTable();
-        rasComboBox = new javax.swing.JComboBox<>();
-        okBTN = new javax.swing.JButton();
-        lblSokAlienHead = new javax.swing.JLabel();
-        tbxBTN = new javax.swing.JButton();
+        comboBoxPlats = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Sök Alien efter specifik plats:");
 
         resultatPNL.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Namn", "Alien-ID"
+                "Alien-ID", "Namn"
             }
         ));
         jScrollPane1.setViewportView(resultatPNL);
 
-        rasComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boglodite", "Squid", "Worm" }));
+        comboBoxPlats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Örebro", "Västerås", "Vilhelmina", "Borås" }));
 
-        okBTN.setText("OK");
-        okBTN.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("Plats");
+
+        jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okBTNActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
-        lblSokAlienHead.setText("Sök Alien efter ras");
-
-        tbxBTN.setText("Tillbaka");
-        tbxBTN.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Tillbaka");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tbxBTNActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -86,69 +89,69 @@ public class AlienRas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(rasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(okBTN))
-                            .addComponent(lblSokAlienHead)))
+                                .addComponent(comboBoxPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1))
+                            .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(tbxBTN)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addGap(159, 159, 159)
+                        .addComponent(jButton2)))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblSokAlienHead)
-                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rasComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(okBTN))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tbxBTN))
+                    .addComponent(comboBoxPlats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void okBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okBTNActionPerformed
-        //Validering som kontrollerar att användaren valt ett värde i comboboxen.
-        if (Valideringsklass.tomCombo(rasComboBox)) {
-            try {
-                // Instansiering av DefaultTableModel och tilldelar resultatPNL (JTable) DefaultTableModel.
-                DefaultTableModel modell = (DefaultTableModel) resultatPNL.getModel();
-                // Sätter antal rader till 0 så att eventulla rader som redan ligger i JTable försvinner
-                modell.setRowCount(0);
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // Instansiering av DefaultTableModel och tilldelar resultatPNL (JTable) DefaultTableModel.
+            DefaultTableModel modell = (DefaultTableModel) resultatPNL.getModel();
+            // Sätter antal rader till 0 så att eventulla rader som redan ligger i JTable försvinner
+            modell.setRowCount(0);
 
-                String sokRas = rasComboBox.getSelectedItem().toString();
-                // Skapar en ArrayList av HashMap som i sin tur består av två strängar. Tilldelas värde genom SQL-frågan.
-                ArrayList<java.util.HashMap<java.lang.String, java.lang.String>> list = idb.fetchRows("SELECT NAMN, ALIEN_ID FROM ALIEN WHERE ALIEN_ID IN (SELECT ALIEN_ID FROM " + sokRas + ")");
+            String sokPlats = comboBoxPlats.getSelectedItem().toString();
+            // Skapar en ArrayList av HashMap som i sin tur består av två strängar. Tilldelas värde genom SQL-frågan.
+            ArrayList<java.util.HashMap<java.lang.String, java.lang.String>> list = idb.fetchRows("SELECT ALIEN_ID, NAMN FROM ALIEN " + "JOIN PLATS ON PLATS_ID = ALIEN.PLATS " + "WHERE BENAMNING = '" + sokPlats + "'");
 
-                Object rowData[] = new Object[2];
-                //Itererar över alla Aliens i Arraylisten
-                Iterator itr = list.iterator();
-                while (itr.hasNext()) {
-                    //Läser ut NAMN och ALIEN_ID ur den HashTable som ligger i ArrayListen. 
-                    //Varje HashMap representerar en rad i databsen
-                    HashMap hm = (HashMap) itr.next();
-                    rowData[0] = hm.get("NAMN");
-                    rowData[1] = hm.get("ALIEN_ID");
-                    // Lägger till datat i den modell som visas i JTable
-                    modell.addRow(rowData);
-                }
-            } catch (InfException ex) {
-                Logger.getLogger(AlienRas.class.getName()).log(Level.SEVERE, null, ex);
+            Object rowData[] = new Object[2];
+            //Itererar över alla Aliens i Arraylisten
+            Iterator itr = list.iterator();
+            while (itr.hasNext()) {
+                //Läser ut NAMN och ALIEN_ID ur den HashTable som ligger i ArrayListen.
+                //Varje HashMap representerar en rad i databsen
+                HashMap hm = (HashMap) itr.next();
+                rowData[0] = hm.get("ALIEN_ID");
+                rowData[1] = hm.get("NAMN");
+                // Lägger till datat i den modell som visas i JTable
+                modell.addRow(rowData);
             }
+        } catch (InfException ex) {
+            Logger.getLogger(AgentAlienPlats.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_okBTNActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void tbxBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbxBTNActionPerformed
-        // TODO add your handling code here:
-        String test = HuvudFonster.hamtaAnvandare();
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         String test = HuvudFonster.hamtaAnvandare();
         //om agenten är admin så kommer man till adminsidan via knappen annars så kommer man till vanliga agentsidan
         try {
             //String namn = idb.fetchSingle("Select namn from agent where namn = " + "'" + test + "'");
@@ -174,7 +177,7 @@ public class AlienRas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Något gick fel");
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_tbxBTNActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -193,30 +196,31 @@ public class AlienRas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AlienRas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgentAlienPlats.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AlienRas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgentAlienPlats.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AlienRas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgentAlienPlats.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AlienRas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgentAlienPlats.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AlienRas(idb).setVisible(true);
+                new AgentAlienPlats(idb).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboBoxPlats;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblSokAlienHead;
-    private javax.swing.JButton okBTN;
-    private javax.swing.JComboBox<String> rasComboBox;
     private javax.swing.JTable resultatPNL;
-    private javax.swing.JButton tbxBTN;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,12 +13,12 @@ import oru.inf.InfException;
  *
  * @author KarlJ
  */
-public class BytLösenord extends javax.swing.JFrame {
+public class BytLosenord extends javax.swing.JFrame {
     private static InfDB idb;
     /**
      * Creates new form BytLösenord
      */
-    public BytLösenord(InfDB idb) {
+    public BytLosenord(InfDB idb) {
         initComponents();
         this.idb = idb;
     }
@@ -99,7 +99,7 @@ public class BytLösenord extends javax.swing.JFrame {
         // TODO add your handling code here:
         String oldpass = oldpassword.getText();
         String pass = passwordnew.getText();
-        if (valideringsklass.tomtFalt(oldpassword) && valideringsklass.tomtFalt(passwordnew)) {
+        if (Valideringsklass.tomtFalt(oldpassword) && Valideringsklass.tomtFalt(passwordnew)) {
             try {
                 String nuvarandepass = idb.fetchSingle("Select losenord from agent where losenord = " + "'" + oldpass + "'");
                 if (oldpass.equals(nuvarandepass)) {
@@ -119,7 +119,7 @@ public class BytLösenord extends javax.swing.JFrame {
 
     private void tbxBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbxBTNActionPerformed
         // TODO add your handling code here:
-       String test = huvudFonster.hamtaAnvandare();
+       String test = HuvudFonster.hamtaAnvandare();
         //om agenten är admin så kommer man till adminsidan via knappen annars så kommer man till vanliga agentsidan
         try{
             //String namn = idb.fetchSingle("Select namn from agent where namn = " + "'" + test + "'");
@@ -166,20 +166,21 @@ public class BytLösenord extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BytLösenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BytLösenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BytLösenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BytLösenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BytLosenord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BytLösenord(idb).setVisible(true);
+                new BytLosenord(idb).setVisible(true);
             }
         });
     }

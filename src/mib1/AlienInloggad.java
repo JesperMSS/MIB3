@@ -125,14 +125,14 @@ public class AlienInloggad extends javax.swing.JFrame {
 
     private void logoutBTNalienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBTNalienActionPerformed
         // TODO add your handling code here:
-        huvudFonster tbx = new huvudFonster(idb);
+        HuvudFonster tbx = new HuvudFonster(idb);
         tbx.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_logoutBTNalienActionPerformed
 
     private void btnbytlösenAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbytlösenAlienActionPerformed
         // TODO add your handling code here:
-        BytLösenOrdAlien nyttlösen = new BytLösenOrdAlien(idb);
+        BytLosenOrdAlien nyttlösen = new BytLosenOrdAlien(idb);
         nyttlösen.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnbytlösenAlienActionPerformed
@@ -143,7 +143,7 @@ public class AlienInloggad extends javax.swing.JFrame {
         minchef.setVisible(true);
         this.dispose();
         */
-        String user = huvudFonster.hamtaAnvandare();
+        String user = HuvudFonster.hamtaAnvandare();
         try{
             //Hämtar agentens namn och telefonnummer så att alien kan kontakta områdeschefen för det området som den vistas i.
             //String agentID = idb.fetchSingle("Select omradeschef.agent_ID from omradeschef join plats on  omradeschef.OMRADE = plats.FINNS_I join alien on alien.PLATS = plats.PLATS_ID where alien.namn = " + "'"  + user + "'");

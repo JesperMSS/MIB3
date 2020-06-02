@@ -4,21 +4,25 @@
  * and open the template in the editor.
  */
 package mib1;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+
 /**
  *
  * @author jespersundin
  */
-public class AgentSökAlien extends javax.swing.JFrame {
- private static InfDB idb;
+public class AgentSokAlien extends javax.swing.JFrame {
+
+    private static InfDB idb;
+
     /**
      * Creates new form AgentSökAlienNY
      */
-    public AgentSökAlien(InfDB idb) {
+    public AgentSokAlien(InfDB idb) {
         initComponents();
         this.idb = idb;
         lblRasSpec2.setVisible(false);
@@ -196,7 +200,6 @@ public class AgentSökAlien extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPassword2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
                         .addComponent(lblPlats)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblPlats2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,58 +225,62 @@ public class AgentSökAlien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void okBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okBTNActionPerformed
-         // Validering som kontrollerar att fältet inte är tomt.
-        if (valideringsklass.tomtFalt(txtNamn)) {
+        // Validering som kontrollerar att fältet inte är tomt.
+        if (Valideringsklass.tomtFalt(txtNamn)) {
+
             try {
+
                 //Instansiering av Strings och tilldelning genom SQL-fråga
                 String Namn = txtNamn.getText();
-             
-                String ID = idb.fetchSingle("SELECT ALIEN_ID from Alien where NAMN=" + "'" + Namn+"'");
-                String Date = idb.fetchSingle("SELECT REGISTRERINGSDATUM from Alien where NAMN=" + "'" + Namn+"'");
-                String Chef = idb.fetchSingle("SELECT ANSVARIG_AGENT from Alien where NAMN=" + "'" + Namn+"'");
-                String Password = idb.fetchSingle("SELECT LOSENORD from Alien where NAMN=" + "'" + Namn+"'");
-                String Phone = idb.fetchSingle("SELECT TELEFON from Alien where NAMN=" + "'" + Namn+"'");
-                String Plats = idb.fetchSingle("SELECT PLATS from Alien where NAMN=" + "'" + Namn+"'");
+                if (Namn.equals(idb.fetchSingle("SELECT NAMN from ALIEN where NAMN =" + "'" + Namn + "'"))) {
+                    String ID = idb.fetchSingle("SELECT ALIEN_ID from Alien where NAMN=" + "'" + Namn + "'");
+                    String Date = idb.fetchSingle("SELECT REGISTRERINGSDATUM from Alien where NAMN=" + "'" + Namn + "'");
+                    String Chef = idb.fetchSingle("SELECT ANSVARIG_AGENT from Alien where NAMN=" + "'" + Namn + "'");
+                    String Password = idb.fetchSingle("SELECT LOSENORD from Alien where NAMN=" + "'" + Namn + "'");
+                    String Phone = idb.fetchSingle("SELECT TELEFON from Alien where NAMN=" + "'" + Namn + "'");
+                    String Plats = idb.fetchSingle("SELECT PLATS from Alien where NAMN=" + "'" + Namn + "'");
 
-                // Sätter datan som hämtats 
-                lblDate2.setText(Date);
-                lblChef2.setText(Chef);
-                lblID2.setText(ID);
-                lblPlats2.setText(Plats);
-                lblPhone2.setText(Phone);
-                lblPassword2.setText(Password);
+                    // Sätter datan som hämtats 
+                    lblDate2.setText(Date);
+                    lblChef2.setText(Chef);
+                    lblID2.setText(ID);
+                    lblPlats2.setText(Plats);
+                    lblPhone2.setText(Phone);
+                    lblPassword2.setText(Password);
 
-                String ras;
-                String antalBoogies = idb.fetchSingle("SELECT ANTAL_BOOGIES from BOGLODITE where ALIEN_ID=" + ID);
-                String antalArmar = idb.fetchSingle("SELECT ANTAL_ARMAR from SQUID where ALIEN_ID=" + ID);
-                
-                //Beroende på vad SQL-frågan gav för svar så sätts "Ras" och "RasSpec" rätt.
-                if (antalBoogies != null) {
-                    lblRasSpec2.setVisible(true);
-                    lblRasSpec.setVisible(true);
-                    ras = "Boglodite";
-                    lblRasSpec.setText("Antal boogies:");
-                    lblRasSpec2.setText(antalBoogies);
-                } else if (antalArmar != null) {
-                    lblRasSpec2.setVisible(true);
-                    lblRasSpec.setVisible(true);
-                    ras = "Squid";
-                    lblRasSpec.setText("Antal armar:");
-                    lblRasSpec2.setText(antalArmar);
+                    String ras;
+                    String antalBoogies = idb.fetchSingle("SELECT ANTAL_BOOGIES from BOGLODITE where ALIEN_ID=" + ID);
+                    String antalArmar = idb.fetchSingle("SELECT ANTAL_ARMAR from SQUID where ALIEN_ID=" + ID);
+
+                    //Beroende på vad SQL-frågan gav för svar så sätts "Ras" och "RasSpec" rätt.
+                    if (antalBoogies != null) {
+                        lblRasSpec2.setVisible(true);
+                        lblRasSpec.setVisible(true);
+                        ras = "Boglodite";
+                        lblRasSpec.setText("Antal boogies:");
+                        lblRasSpec2.setText(antalBoogies);
+                    } else if (antalArmar != null) {
+                        lblRasSpec2.setVisible(true);
+                        lblRasSpec.setVisible(true);
+                        ras = "Squid";
+                        lblRasSpec.setText("Antal armar:");
+                        lblRasSpec2.setText(antalArmar);
+                    } else {
+                        ras = "Worm";
+                        lblRasSpec2.setVisible(false);
+                        lblRasSpec.setVisible(false);
+                    }
+
                 } else {
-                    ras = "Worm";
-                    lblRasSpec2.setVisible(false);
-                    lblRasSpec.setVisible(false);
+                    JOptionPane.showMessageDialog(null, "Det finns ingen Alien med detta namn.");
                 }
-                lblRas2.setText(ras);
-
             } catch (InfException ex) {
-                Logger.getLogger(AgentSökAlien.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AgentSokAlien.class.getName()).log(Level.SEVERE, null, ex);
             }
     }//GEN-LAST:event_okBTNActionPerformed
-} 
+    }
     private void tbxBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbxBTNActionPerformed
-           String test = huvudFonster.hamtaAnvandare();
+        String test = HuvudFonster.hamtaAnvandare();
         //om agenten är admin så kommer man till adminsidan via knappen annars så kommer man till vanliga agentsidan
         try {
             //String namn = idb.fetchSingle("Select namn from agent where namn = " + "'" + test + "'");
@@ -300,7 +307,7 @@ public class AgentSökAlien extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_tbxBTNActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
@@ -318,14 +325,18 @@ public class AgentSökAlien extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgentSökAlien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgentSokAlien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgentSökAlien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgentSokAlien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgentSökAlien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgentSokAlien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgentSökAlien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AgentSokAlien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -334,7 +345,7 @@ public class AgentSökAlien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgentSökAlien(idb).setVisible(true);
+                new AgentSokAlien(idb).setVisible(true);
             }
         });
     }

@@ -217,35 +217,35 @@ public class AdminFonster extends javax.swing.JFrame {
 
     private void registreraAlienBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registreraAlienBTNActionPerformed
         // TODO add your handling code here:
-        agentAlien nyAlien = new agentAlien(idb);
+        AgentAlien nyAlien = new AgentAlien(idb);
         nyAlien.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_registreraAlienBTNActionPerformed
 
     private void removeAgentBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAgentBTNActionPerformed
         // TODO add your handling code here:
-        taBortAgent remove = new taBortAgent(idb);
+        TaBortAgent remove = new TaBortAgent(idb);
         remove.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_removeAgentBTNActionPerformed
 
     private void removeAlienBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAlienBTNActionPerformed
         // TODO add your handling code here:
-        taBortAlien remove = new taBortAlien(idb);
+        TaBortAlien remove = new TaBortAlien(idb);
         remove.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_removeAlienBTNActionPerformed
 
     private void removeUtrustningBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeUtrustningBTNActionPerformed
         // TODO add your handling code here:
-        taBortUtrustning remove = new taBortUtrustning(idb);
+        TaBortUtrustning remove = new TaBortUtrustning(idb);
         remove.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_removeUtrustningBTNActionPerformed
 
     private void registerUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerUtrustningActionPerformed
         // TODO add your handling code here:
-        agentUtrustning nyUtrustning = new agentUtrustning(idb);
+        AgentUtrustning nyUtrustning = new AgentUtrustning(idb);
         nyUtrustning.setVisible(true);
         this.dispose();
         
@@ -253,42 +253,42 @@ public class AdminFonster extends javax.swing.JFrame {
 
     private void changeKontorsChefBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeKontorsChefBTNActionPerformed
         // TODO add your handling code here:
-        nyKontorschef ny = new nyKontorschef(idb);
+        NyKontorschef ny = new NyKontorschef(idb);
         ny.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_changeKontorsChefBTNActionPerformed
 
     private void removeAdminBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAdminBTNActionPerformed
         // TODO add your handling code here:
-        taBortAdmin remove = new taBortAdmin(idb);
+        TaBortAdmin remove = new TaBortAdmin(idb);
         remove.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_removeAdminBTNActionPerformed
 
     private void görAdminBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_görAdminBTNActionPerformed
         // TODO add your handling code here:
-        görAdmin ny = new görAdmin(idb);
+        GorAdmin ny = new GorAdmin(idb);
         ny.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_görAdminBTNActionPerformed
 
     private void changeOmrådesChefBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeOmrådesChefBTNActionPerformed
         // TODO add your handling code here:
-        nyOmrådeschef ny = new nyOmrådeschef(idb);
+        NyOmradeschef ny = new NyOmradeschef(idb);
         ny.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_changeOmrådesChefBTNActionPerformed
 
     private void logoutBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBTNActionPerformed
         // TODO add your handling code here:
-        huvudFonster tbx = new huvudFonster(idb);
+        HuvudFonster tbx = new HuvudFonster(idb);
         tbx.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_logoutBTNActionPerformed
 
     private void changeLösenBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeLösenBTNActionPerformed
         // TODO add your handling code here:
-        BytLösenord nytt = new BytLösenord(idb);
+        BytLosenord nytt = new BytLosenord(idb);
         nytt.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_changeLösenBTNActionPerformed

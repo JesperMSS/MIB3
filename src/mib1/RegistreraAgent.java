@@ -217,7 +217,7 @@ public class RegistreraAgent extends javax.swing.JFrame {
         String typ = agentTypCombo.getSelectedItem().toString();
         String område = områdeCombo.getSelectedItem().toString();
         
-        if(valideringsklass.tomtFalt(NamnTextField) && valideringsklass.tomtFalt(agentLösenTextField) && valideringsklass.tomtFalt(tfnTextField) && valideringsklass.tomCombo(isAdminCombo) && valideringsklass.tomCombo(agentTypCombo)){
+        if(Valideringsklass.tomtFalt(NamnTextField) && Valideringsklass.tomtFalt(agentLösenTextField) && Valideringsklass.tomtFalt(tfnTextField) && Valideringsklass.tomCombo(isAdminCombo) && Valideringsklass.tomCombo(agentTypCombo)){
         try{
             String Admin = "";
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

@@ -14,12 +14,12 @@ import oru.inf.InfException;
  *
  * @author KarlJ
  */
-public class görAdmin extends javax.swing.JFrame {
+public class GorAdmin extends javax.swing.JFrame {
 private static InfDB idb;
     /**
      * Creates new form görAdmin
      */
-    public görAdmin(InfDB idb) {
+    public GorAdmin(InfDB idb) {
         initComponents();
         this.idb = idb;
     }
@@ -93,7 +93,7 @@ private static InfDB idb;
 
     private void görAdminBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_görAdminBTNActionPerformed
         // TODO add your handling code here:
-        if(valideringsklass.tomtFalt(görAdminTextField)){
+        if(Valideringsklass.tomtFalt(görAdminTextField)){
         String adminNamn = görAdminTextField.getText();
         
         try{
@@ -133,20 +133,21 @@ private static InfDB idb;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(görAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GorAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(görAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GorAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(görAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GorAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(görAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GorAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new görAdmin(idb).setVisible(true);
+                new GorAdmin(idb).setVisible(true);
             }
         });
     }
